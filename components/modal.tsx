@@ -31,7 +31,9 @@ const Modal = ({ items }: ModalProps) => {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Add new question</AlertDialogTitle>
-          <AlertDialogDescription>Description</AlertDialogDescription>
+          <AlertDialogDescription>
+            Type in your recruitment question and answer
+          </AlertDialogDescription>
         </AlertDialogHeader>
         <TableForm
           setOpen={setOpen}

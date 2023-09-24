@@ -23,11 +23,17 @@ import { Dispatch, SetStateAction } from "react"
 import axios from "axios"
 import { toast } from "react-toastify"
 import { Combobox } from "./ui/combobox"
+import { Textarea } from "./ui/textarea"
 
 const formSchema = z.object({
-  title: z.string().min(1, {
-    message: "Title is required",
-  }),
+  title: z
+    .string()
+    .min(1, {
+      message: "Title is required",
+    })
+    .max(1000, {
+      message: "Max 1000 characters",
+    }),
   description: z
     .string()
     .min(1, {
@@ -36,7 +42,7 @@ const formSchema = z.object({
     .max(1000, {
       message: "Max 1000 characters",
     }),
-  categoryId: z.string().min(1),
+  categoryId: z.string().min(1, { message: "Category must be selected" }),
 })
 
 interface TableFormProps {
@@ -59,6 +65,8 @@ const TableForm = ({ setOpen, categoryOptions }: TableFormProps) => {
     },
   })
 
+  const { isSubmitting, isValid } = form.formState
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values)
     setOpen(false)
@@ -72,19 +80,20 @@ const TableForm = ({ setOpen, categoryOptions }: TableFormProps) => {
   return (
     <>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Question title</FormLabel>
+                <FormLabel>Type a question</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g. 'What is DOM'" {...field} />
+                  <Textarea
+                    placeholder="e.g. 'What is Virtual DOM?'"
+                    {...field}
+                  />
                 </FormControl>
-                <FormDescription>
-                  What will you teach in this course?
-                </FormDescription>
+
                 <FormMessage />
               </FormItem>
             )}
@@ -94,13 +103,14 @@ const TableForm = ({ setOpen, categoryOptions }: TableFormProps) => {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Put your answer</FormLabel>
+                <FormLabel>type a answer</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g. 'What is DOM'" {...field} />
+                  <Textarea
+                    placeholder="e.g. 'The Virtual DOM (VDOM) is an in-memory representation of Real DOM.'"
+                    {...field}
+                  />
                 </FormControl>
-                <FormDescription>
-                  What will you teach in this course?
-                </FormDescription>
+
                 <FormMessage />
               </FormItem>
             )}
@@ -110,6 +120,7 @@ const TableForm = ({ setOpen, categoryOptions }: TableFormProps) => {
             name="categoryId"
             render={({ field }) => (
               <FormItem>
+                <FormLabel>Select a category</FormLabel>
                 <FormControl>
                   <Combobox options={...categoryOptions} {...field} />
                 </FormControl>
@@ -120,7 +131,9 @@ const TableForm = ({ setOpen, categoryOptions }: TableFormProps) => {
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
 
-            <Button type="submit">Accept</Button>
+            <Button type="submit" disabled={isSubmitting}>
+              Add question
+            </Button>
           </AlertDialogFooter>
         </form>
       </Form>

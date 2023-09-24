@@ -25,12 +25,12 @@ export default async function Home({ searchParams }: HomePageProps) {
 
   console.log(questions)
   return (
-    <main className="flex flex-row gap-x-16  lg:flex-nowrap flex-wrap max-w-7xl  min-h-screen mx-auto p-20">
-      <div className="flex flex-col gap-y-6 basis-1/4">
+    <main className="grid grid-cols-1 lg:grid-cols-4 gap-x-10 gap-y-10  max-w-7xl  min-h-screen mx-auto px-2 py-4 md:p-20">
+      <div className="flex lg:flex-col gap-y-6 gap-x-6 justify-center lg:justify-normal flex-1">
         <InfoCard />
         <Categories items={categories} />
       </div>
-      <div className="flex flex-col basis-3/4 ">
+      <div className="flex flex-col lg:col-span-3">
         <div>
           <Navbar items={categories} />
         </div>
