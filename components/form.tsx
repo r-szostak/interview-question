@@ -22,6 +22,7 @@ import { useRouter } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
 import axios from "axios"
 import { toast } from "react-toastify"
+import { Combobox } from "./ui/combobox"
 
 const formSchema = z.object({
   title: z.string().min(1, {
@@ -35,19 +36,26 @@ const formSchema = z.object({
     .max(1000, {
       message: "Max 1000 characters",
     }),
+  categoryId: z.string().min(1),
 })
 
-const TableForm = ({
-  setOpen,
-}: {
+interface TableFormProps {
   setOpen: Dispatch<SetStateAction<boolean>>
-}) => {
+  categoryOptions: {
+    label: string
+    value: string
+  }[]
+}
+
+const TableForm = ({ setOpen, categoryOptions }: TableFormProps) => {
   const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
+      description: "",
+      categoryId: "",
     },
   })
 
@@ -93,6 +101,18 @@ const TableForm = ({
                 <FormDescription>
                   What will you teach in this course?
                 </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="categoryId"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Combobox options={...categoryOptions} {...field} />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}

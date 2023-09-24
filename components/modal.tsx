@@ -11,9 +11,14 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
+import { Category } from "@prisma/client"
 import { useState } from "react"
 
-const Modal = () => {
+interface ModalProps {
+  items: Category[]
+}
+
+const Modal = ({ items }: ModalProps) => {
   const [open, setOpen] = useState(false)
 
   return (
@@ -28,7 +33,13 @@ const Modal = () => {
           <AlertDialogTitle>Add new question</AlertDialogTitle>
           <AlertDialogDescription>Description</AlertDialogDescription>
         </AlertDialogHeader>
-        <TableForm setOpen={setOpen} />
+        <TableForm
+          setOpen={setOpen}
+          categoryOptions={items.map((category) => ({
+            label: category.name,
+            value: category.id,
+          }))}
+        />
       </AlertDialogContent>
     </AlertDialog>
   )
