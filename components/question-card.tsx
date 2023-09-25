@@ -4,12 +4,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import Rating from "./rating"
 
 interface QuestionCardProps {
   title: string
   description: string
   rating: number
   category: string
+  questionId: string
 }
 
 const QuestionCard = ({
@@ -17,6 +19,7 @@ const QuestionCard = ({
   description,
   rating,
   category,
+  questionId,
 }: QuestionCardProps) => {
   return (
     <div className="flex justify-between items-center p-6 bg-white rounded-lg  w-full gap-x-20 text-justify">
@@ -34,7 +37,9 @@ const QuestionCard = ({
           </div>
         )}
       </div>
-      <div className="py-4 px-3 bg-slate-100 border rounded-lg">{rating}</div>
+      <div className="py-4 px-3 bg-slate-100 border rounded-lg flex flex-col items-center justify-center">
+        <Rating rating={rating} questionId={questionId} />
+      </div>
     </div>
   )
 }

@@ -17,6 +17,7 @@ const QuestionsList = ({ items }: QuestionsListProps) => {
       {items.map((item) => (
         <QuestionCard
           key={item.id}
+          questionId={item.id}
           title={item.title}
           description={item.description}
           rating={item.rating}

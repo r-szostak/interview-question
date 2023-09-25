@@ -5,6 +5,7 @@ import Categories from "@/components/categories"
 import { db } from "@/lib/db"
 import { getQuestions } from "@/actions/get-questions"
 import QuestionsList from "@/components/questions-list"
+import { getCategories } from "@/actions/get-categories"
 
 interface HomePageProps {
   searchParams: {
@@ -13,11 +14,7 @@ interface HomePageProps {
 }
 
 export default async function Home({ searchParams }: HomePageProps) {
-  const categories = await db.category.findMany({
-    orderBy: {
-      name: "asc",
-    },
-  })
+  const categories = await getCategories()
 
   const questions = await getQuestions({
     ...searchParams,
@@ -32,7 +29,7 @@ export default async function Home({ searchParams }: HomePageProps) {
       </div>
       <div className="flex flex-col lg:col-span-3">
         <div>
-          <Navbar items={categories} />
+          <Navbar items={categories} numberOfQuestions={questions.length} />
         </div>
         <QuestionsList items={questions} />
       </div>
