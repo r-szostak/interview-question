@@ -1,8 +1,6 @@
 import Navbar from "@/components/navbar"
 import InfoCard from "@/components/info-card"
-
 import Categories from "@/components/categories"
-import { db } from "@/lib/db"
 import { getQuestions } from "@/actions/get-questions"
 import QuestionsList from "@/components/questions-list"
 import { getCategories } from "@/actions/get-categories"
@@ -20,7 +18,6 @@ export default async function Home({ searchParams }: HomePageProps) {
     ...searchParams,
   })
 
-  console.log(questions)
   return (
     <main className="grid grid-cols-1 lg:grid-cols-4 gap-x-10 gap-y-10  max-w-7xl  min-h-screen mx-auto px-2 py-4 md:p-20">
       <div className="flex lg:flex-col gap-y-6 gap-x-6 justify-center lg:justify-normal flex-1">
