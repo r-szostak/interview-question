@@ -5,6 +5,7 @@ import { getQuestions } from "@/actions/get-questions"
 import QuestionsList from "@/components/questions-list"
 import { getCategories } from "@/actions/get-categories"
 
+export const dynamic = "force-dynamic"
 interface HomePageProps {
   searchParams: {
     categoryId: string

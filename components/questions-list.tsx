@@ -1,5 +1,3 @@
-"use client"
-
 import { Category, Question } from "@prisma/client"
 import React from "react"
 import QuestionCard from "./question-card"
