@@ -1,4 +1,4 @@
-import { db } from "@/lib/db"
+import db from "@/lib/db"
 import { Category, Question } from "@prisma/client"
 
 type QuestionWithCategory = Question & {
