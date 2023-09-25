@@ -7,14 +7,12 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormLabel,
   FormMessage,
   FormItem,
 } from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -65,7 +63,7 @@ const TableForm = ({ setOpen, categoryOptions }: TableFormProps) => {
     },
   })
 
-  const { isSubmitting, isValid } = form.formState
+  const { isSubmitting } = form.formState
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values)
@@ -103,7 +101,7 @@ const TableForm = ({ setOpen, categoryOptions }: TableFormProps) => {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>type a answer</FormLabel>
+                <FormLabel>Type a answer</FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="e.g. 'The Virtual DOM (VDOM) is an in-memory representation of Real DOM.'"

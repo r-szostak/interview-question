@@ -1,6 +1,6 @@
 "use client"
 
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import {
   Select,
   SelectContent,
@@ -19,13 +19,16 @@ const options = [
 const SortBy = () => {
   const pathname = usePathname()
   const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const currentCategoryId = searchParams.get("categoryId")
 
   const onChange = (value: string) => {
-    console.log(value)
     const url = qs.stringifyUrl(
       {
         url: pathname,
         query: {
+          categoryId: currentCategoryId,
           sortBy: value,
         },
       },
@@ -36,7 +39,7 @@ const SortBy = () => {
 
   return (
     <div className="flex justify-center items-center gap-x-3">
-      <p>Sort by:</p>
+      <p className="text-white font-bold text-sm">Sort by:</p>
       <Select
         onValueChange={(value) => onChange(value)}
         defaultValue="createdAt"

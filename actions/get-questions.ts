@@ -7,9 +7,11 @@ type QuestionWithCategory = Question & {
 
 type getQuestions = {
   categoryId?: string
+  sortBy?: string
 }
 export const getQuestions = async ({
   categoryId,
+  sortBy = "createdAt",
 }: getQuestions): Promise<QuestionWithCategory[]> => {
   try {
     const questions = await db.question.findMany({
@@ -20,7 +22,7 @@ export const getQuestions = async ({
         category: true,
       },
       orderBy: {
-        createdAt: "desc",
+        [sortBy]: "desc",
       },
     })
     return questions

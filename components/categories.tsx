@@ -3,6 +3,7 @@
 import { Category } from "@prisma/client"
 import { IconType } from "react-icons"
 import { FaHtml5, FaCss3, FaJs, FaReact } from "react-icons/fa"
+import { SiNextdotjs, SiTypescript } from "react-icons/si"
 import CategoryItem from "./category-item"
 
 interface CategoriesProps {
@@ -14,6 +15,8 @@ const iconMap: Record<Category["name"], IconType> = {
   CSS: FaCss3,
   Javascript: FaJs,
   React: FaReact,
+  NextJS: SiNextdotjs,
+  Typescript: SiTypescript,
 }
 
 const Categories = ({ items }: CategoriesProps) => {

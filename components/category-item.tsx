@@ -18,6 +18,7 @@ const CategoryItem = ({ label, value, icon: Icon }: CategoryItemProps) => {
   const searchParams = useSearchParams()
 
   const currentCategoryId = searchParams.get("categoryId")
+  const currentSortBy = searchParams.get("sortBy")
   const isSelected = currentCategoryId === value
 
   const onClick = () => {
@@ -26,6 +27,7 @@ const CategoryItem = ({ label, value, icon: Icon }: CategoryItemProps) => {
         url: pathname,
         query: {
           categoryId: isSelected ? null : value,
+          sortBy: currentSortBy,
         },
       },
       { skipEmptyString: true, skipNull: true }
